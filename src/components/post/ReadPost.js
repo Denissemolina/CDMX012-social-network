@@ -1,39 +1,48 @@
-import { getFirestore, collection, query, addDoc, getDocs, doc, setDoc, onSnapshot} 
- frogitm "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js"
-// // aqui on snapshot
-//import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
-//import { firebaseConfig } from '.';
+import { q, onSnapshot } from '../../lib/postFirebase.js';
 
-//import { savePost } from '../post/Post.js'
+export const ReadPost = () => {
+  const allPost = document.createElement('div');
+  onSnapshot(q, (querySnapshot) => {
+    while (allPost.firstChild) {
+      allPost.removeChild(allPost.firstChild);
+    }
+    querySnapshot.forEach((doc) => {
+      const divPosts = document.createElement('div'); // aqui habias puesto Posts??
+      divPosts.setAttribute('id', 'post_div');
+      divPosts.textContent = doc.data().post;
 
-//const app = initializeApp(firebaseConfig);
+      const reactionsPosts = document.createElement('section');
+      reactionsPosts.setAttribute('id', 'reactions');
 
-const db = getFirestore();
+      const likeButt = document.createElement('img');
+      likeButt.setAttribute('id', 'like_post');
+      likeButt.setAttribute('class', 'reactions');
+      likeButt.setAttribute('src', './components/images/huella_like.png');
+      likeButt.addEventListener('click', () => {
 
+      });
 
-// const ReadPost = async (post, date) => {
-//   const divPost = document.createElement('div');
-//   divPost.innerHTML = await savePost(post, date);
-//   return divPost;
-// };
-export const savePost = (post, date) => {
-  addDoc(collection(db, 'NewNewColection'), {post, date});
-}
-export const ReadPost = (callBackFn) => {
-    getDocs(collection(db, 'posts3')).then((snapshot) => {
-      callBackFn(snapshot.docs);
+      const editButt = document.createElement('img');
+      editButt.setAttribute('id', 'edit_post');
+      editButt.setAttribute('class', 'reactions');
+      editButt.setAttribute('src', './components/images/edit_post.png');
+      editButt.addEventListener('click', () => {
+
+      });
+
+      const deleteButt = document.createElement('img');
+      deleteButt.setAttribute('id', 'delete_post');
+      deleteButt.setAttribute('class', 'reactions');
+      deleteButt.setAttribute('src', './components/images/delete_post.png');
+      deleteButt.addEventListener('click', () => {
+
+      });
+
+      reactionsPosts.append(likeButt, editButt, deleteButt);
+      divPosts.appendChild(reactionsPosts);
+      allPost.appendChild(divPosts);
     });
-  };
+  });
 
-// const unsub = onSnapshot(doc(db, "cities", "SF"), (doc) => {
-//     console.log("Current data: ", doc.data());
-// })
-
-// export const dataCall = (callBackFunction) => {
-//     getDocs(collection(db, 'newColection')).then((snapshot) => {
-//       callBackFunction(snapshot.docs);
-//     });
-//   };
-
-
-export default ReadPost;
+  return allPost;
+};

@@ -8,7 +8,7 @@ const db = getFirestore();
   // export const savePost = (post, date) => {
   //   addDoc(collection(db, 'newColection2'), {post, date});
   // };
-// q
+// q un querycolection, quien accede a la coleccion 
 
 
 

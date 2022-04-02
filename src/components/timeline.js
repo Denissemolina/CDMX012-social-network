@@ -1,40 +1,50 @@
 /* eslint-disable import/no-cycle */
-import { onNavigate } from '../main.js';
-import { logOut } from '../lib/singIn.js';
-import { savePost } from '../components/post/ReadPost.js'
+import { logOut } from '../lib/firebase.js';
+import { savePost } from '../lib/postFirebase.js';
+
 //import { dataCall } from '../';
 
-import ReadPost from './post/ReadPost.js';
+import {ReadPost} from './post/ReadPost.js';
 
 export const timeline = () => {
-  const timelineDiv = document.createElement('div');
-  timelineDiv.setAttribute('id', 'timeline_div');
+  const timelineContainer = document.createElement('div');
+  timelineContainer.setAttribute('id', 'timeline_cont');
 
-  const posti = document.createElement('input');
-  posti.placeholder = 'Crear publicación';
-  posti.id = 'post_place';
-  posti.classList.add('post_classes');
+  const containerHdr = document.createElement('section');
+  containerHdr.setAttribute('id', 'container_hdr');
 
- 
+  const logoHdr = document.createElement('img');
+  logoHdr.setAttribute('id', 'logo_hdr');
+  logoHdr.setAttribute('src', './components/images/solovino header.png');
 
-  const sendButton = document.createElement('button');
-  sendButton.setAttribute('id', 'button_send');
-  sendButton.textContent = 'Publicar';
-  sendButton.addEventListener('click', () => {
-   const postiPlace = document.getElementById('post_place'); 
-   savePost(postiPlace, new Date());
-  });
-
-  const logOutButton = document.createElement('button');
+  const logOutButton = document.createElement('p');
   logOutButton.setAttribute('id', 'button_logout');
   logOutButton.textContent = 'Cerrar sesión';
   logOutButton.addEventListener('click', () => {
     logOut();
   });
 
-  const posts = document.createElement('div');
-  posts.append(ReadPost(posti.value, new Date()));
+  const containerTwo = document.createElement('section');
+  containerTwo.setAttribute('id', 'container_two');
 
-  timelineDiv.append(posti, sendButton, logOutButton, ReadPost(posti.value, new Date()));
-  return timelineDiv;
+  const createPost = document.createElement('input');
+  createPost.placeholder = 'Crear publicación';
+  createPost.id = 'post_place';
+  createPost.classList.add('post_classes');
+
+  const sendButton = document.createElement('button');
+  sendButton.setAttribute('id', 'button_send');
+  sendButton.textContent = 'Publicar';
+  sendButton.addEventListener('click', () => {
+    const postPlace = document.getElementById('post_place').value;
+    savePost(postPlace, new Date());
+  });
+
+  const posts = document.createElement('div');
+  posts.append(ReadPost());
+
+  containerHdr.append(logoHdr, logOutButton);
+  containerTwo.append(createPost, sendButton);
+  timelineContainer.append(containerHdr, containerTwo, posts);
+  return timelineContainer;
 };

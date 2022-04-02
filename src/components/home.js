@@ -1,12 +1,14 @@
 /* eslint-disable import/no-cycle */
 import { onNavigate } from '../main.js';
-import { singIn } from '../lib/singIn.js';
-import { loginWithGoogle } from '../lib/singIn.js';
+import { singIn, loginWithGoogle } from '../lib/firebase.js';
 
 export const home = () => {
-  const homeDiv = document.createElement('div');
-  homeDiv.setAttribute('id', 'home_div');
+  const containerHome = document.createElement('div');
+  containerHome.setAttribute('id', 'cont_home');
 
+  const containerSec = document.createElement('section');
+  containerSec.setAttribute('id', 'cont_home2');
+  
   const logoHome = document.createElement('img');
   logoHome.setAttribute('id', 'logo_home');
   logoHome.setAttribute('src', './components/images/Solovino_Black.png');
@@ -25,30 +27,35 @@ export const home = () => {
   buttonLogin.setAttribute('id', 'button_login');
   buttonLogin.textContent = 'Iniciar sesión';
   buttonLogin.addEventListener('click', () => {
-    const mailValue2 = document.getElementById('mail_login').value;
-    const passValue2 = document.getElementById('pass_login').value;
-    singIn(mailValue2, passValue2);
+    const mailValue = document.getElementById('mail_login').value;
+    const passValue = document.getElementById('pass_login').value;
+    singIn(mailValue, passValue);
   });
 
-  const nodoH2 = document.createElement('h2');
-  nodoH2.setAttribute('id', 'nodo_H2');
-  nodoH2.textContent = 'Crear una cuenta';
+  const createAccount = document.createElement('h2');
+  createAccount.setAttribute('id', 'account');
+  createAccount.textContent = 'Crear una cuenta';
+
+  const containerSec2 = document.createElement('section');
+  containerSec2.setAttribute('id', 'cont_home3');
 
   const buttonRegister = document.createElement('button');
   buttonRegister.setAttribute('class', 'button_register');
-
   buttonRegister.textContent = 'Registrate';
   buttonRegister.addEventListener('click', () => {
     onNavigate('/register');
   });
 
-  const googleButt = document.createElement('button');
+  const googleButt = document.createElement('img');
   googleButt.setAttribute('id', 'google');
-  googleButt.textContent = 'Google';
+  googleButt.setAttribute('src', './components/images/google.png');
   googleButt.addEventListener('click', () => {
     loginWithGoogle();
   });
 
-homeDiv.append(logoHome, mailLogin, passwordLogin, buttonLogin, nodoH2, buttonRegister, googleButt);
-  return homeDiv;
+  // eslint-disable-next-line max-len
+  containerHome.append(containerSec, containerSec2);
+  containerSec.append(logoHome, mailLogin, passwordLogin, buttonLogin, createAccount);
+  containerSec2.append(buttonRegister, googleButt);
+  return containerHome;
 };

@@ -28,11 +28,13 @@ window.onpopstate = () => {
   rootDiv.appendChild(routes[window.location.pathname]());
 };
 
+//Observador
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
     onNavigate('/timeline');
     const uid = user.uid;
+    const email = user.email;
     // ...
   } else {
     onNavigate('/');

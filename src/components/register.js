@@ -1,10 +1,13 @@
 /* eslint-disable import/no-cycle */
 import { onNavigate } from '../main.js';
-import { createUser } from '../lib/auth.js';
+import { createUser } from '../lib/firebase.js';
 
 export const register = () => {
-  const divReg = document.createElement('div');
-  divReg.setAttribute('id', 'div_register');
+  const mainContainer = document.createElement('div');
+  mainContainer.setAttribute('id', 'main_container');
+
+  const secContainer = document.createElement('div');
+  secContainer.setAttribute('id', 'sec_container');
 
   const tittleReg = document.createElement('h1');
   tittleReg.setAttribute('id', 'tittle_1');
@@ -33,13 +36,17 @@ export const register = () => {
     createUser(mailValue, passValue);
   });
 
+  const divReg2 = document.createElement('div');
+  divReg2.setAttribute('id', 'div_register2');
+
   const backToHome = document.createElement('button');
   backToHome.setAttribute('id', 'button_back');
   backToHome.textContent = 'Regresar al inicio';
   backToHome.addEventListener('click', () => {
     onNavigate('/');
   });
-
-  divReg.append(tittleReg, mailReg, passwordReg, conditions, buttonReg, backToHome);
-  return divReg;
+  mainContainer.append(secContainer, divReg2)
+  secContainer.append(tittleReg, mailReg, passwordReg, conditions, buttonReg);
+  divReg2.appendChild(backToHome);
+  return mainContainer;
 };
