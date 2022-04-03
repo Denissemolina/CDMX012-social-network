@@ -8,7 +8,7 @@ export const home = () => {
 
   const containerSec = document.createElement('section');
   containerSec.setAttribute('id', 'cont_home2');
-  
+
   const logoHome = document.createElement('img');
   logoHome.setAttribute('id', 'logo_home');
   logoHome.setAttribute('src', './components/images/Solovino_Black.png');

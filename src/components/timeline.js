@@ -10,7 +10,7 @@ export const timeline = () => {
   const timelineContainer = document.createElement('div');
   timelineContainer.setAttribute('id', 'timeline_cont');
 
-  const containerHdr = document.createElement('section');
+  const containerHdr = document.createElement('div');
   containerHdr.setAttribute('id', 'container_hdr');
 
   const logoHdr = document.createElement('img');
@@ -27,24 +27,30 @@ export const timeline = () => {
   const containerTwo = document.createElement('section');
   containerTwo.setAttribute('id', 'container_two');
 
+  const form = document.createElement('form');
+  form.id = 'form';
+
   const createPost = document.createElement('input');
-  createPost.placeholder = 'Crear publicación';
+  createPost.placeholder = 'Escribe algo..';
   createPost.id = 'post_place';
   createPost.classList.add('post_classes');
 
   const sendButton = document.createElement('button');
   sendButton.setAttribute('id', 'button_send');
   sendButton.textContent = 'Publicar';
-  sendButton.addEventListener('click', () => {
+  sendButton.addEventListener('click', (e) => {
+   
     const postPlace = document.getElementById('post_place').value;
     savePost(postPlace, new Date());
+    e.preventDefault();
   });
 
   const posts = document.createElement('div');
   posts.append(ReadPost());
 
   containerHdr.append(logoHdr, logOutButton);
-  containerTwo.append(createPost, sendButton);
+  form.append(createPost, sendButton);
+  containerTwo.appendChild(form);
   timelineContainer.append(containerHdr, containerTwo, posts);
   return timelineContainer;
 };

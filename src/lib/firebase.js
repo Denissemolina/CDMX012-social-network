@@ -15,30 +15,38 @@ import { app } from './firebaseconfig.js';
 
 const auth = getAuth();
 
-//Observador
-
-//Crear usuario
+// Crear usuario
 export const createUser = (email, password) => {
- // const auth = getAuth();
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
       onNavigate('/timeline');
-      //console.log('ya entro el user');
-    // ...
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      //console.log('Nel Carnal');
-    // ..
     });
 };
 
+
+//Obtener el usuario que accedio
+export const user = auth.currentUser;
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid; 
+    const displayName = user.displayName;
+    const email = user.email;
+    const photoURL = user.photoURL;
+    // console.log(user);
+    };
+});  
+
+
+//Perfil usuario
+
 // Iniciar sesion
 export const singIn = (email, password) => {
-  //const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     // Signed in
@@ -46,16 +54,15 @@ export const singIn = (email, password) => {
       onNavigate('/timeline');
     })
     .catch((error) => {
-      const errorCode = error.code;
-     // alert(errorCode);
-      const errorMessage = error.message;
-     // alert(errorMessage);
+      // const errorCode = error.code;
+      // alert(errorCode);
+      // const errorMessage = error.message;
+      // alert(errorMessage);
     });
 };
 
 // Cerrar sesión
 export const logOut = () => {
- // const auth = getAuth();
   signOut(auth).then(() => {
     onNavigate('/');
   }).catch((error) => {
@@ -65,7 +72,6 @@ export const logOut = () => {
 // Login con Google
 export const loginWithGoogle = () => {
   const provider = new GoogleAuthProvider();
- // const auth = getAuth();
   signInWithPopup(auth, provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
