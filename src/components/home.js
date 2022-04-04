@@ -3,11 +3,11 @@ import { onNavigate } from '../main.js';
 import { singIn, loginWithGoogle } from '../lib/firebase.js';
 
 export const home = () => {
-  const containerHome = document.createElement('div');
-  containerHome.setAttribute('id', 'cont_home');
+  const homeContainer = document.createElement('div');
+  homeContainer.setAttribute('id', 'main_home');
 
-  const containerSec = document.createElement('section');
-  containerSec.setAttribute('id', 'cont_home2');
+  const homeSecCont = document.createElement('section');
+  homeSecCont.setAttribute('id', 'sec_home');
 
   const logoHome = document.createElement('img');
   logoHome.setAttribute('id', 'logo_home');
@@ -36,8 +36,8 @@ export const home = () => {
   createAccount.setAttribute('id', 'account');
   createAccount.textContent = 'Crear una cuenta';
 
-  const containerSec2 = document.createElement('section');
-  containerSec2.setAttribute('id', 'cont_home3');
+  const homeThirdCont = document.createElement('section');
+  homeThirdCont.setAttribute('id', 'third_home');
 
   const buttonRegister = document.createElement('button');
   buttonRegister.setAttribute('class', 'button_register');
@@ -54,8 +54,8 @@ export const home = () => {
   });
 
   // eslint-disable-next-line max-len
-  containerHome.append(containerSec, containerSec2);
-  containerSec.append(logoHome, mailLogin, passwordLogin, buttonLogin, createAccount);
-  containerSec2.append(buttonRegister, googleButt);
-  return containerHome;
+  homeContainer.append(homeSecCont, homeThirdCont);
+  homeSecCont.append(logoHome, mailLogin, passwordLogin, buttonLogin, createAccount);
+  homeThirdCont.append(buttonRegister, googleButt);
+  return homeContainer;
 };

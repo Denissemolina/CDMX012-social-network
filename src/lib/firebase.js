@@ -11,7 +11,7 @@ import {
   from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js';
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { app } from './firebaseconfig.js';
+import { app } from './firebaseConfig.js';
 
 const auth = getAuth();
 

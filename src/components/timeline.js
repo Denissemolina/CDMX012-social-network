@@ -1,20 +1,19 @@
 /* eslint-disable import/no-cycle */
 import { logOut } from '../lib/firebase.js';
 import { savePost } from '../lib/postFirebase.js';
-
 //import { dataCall } from '../';
 
-import {ReadPost} from './post/ReadPost.js';
+import {ReadPost} from './post/readPost.js';
 
 export const timeline = () => {
   const timelineContainer = document.createElement('div');
-  timelineContainer.setAttribute('id', 'timeline_cont');
+  timelineContainer.setAttribute('id', 'main_timeline');
 
-  const containerHdr = document.createElement('div');
-  containerHdr.setAttribute('id', 'container_hdr');
+  const timelineSecCont = document.createElement('div');
+  timelineSecCont.setAttribute('id', 'sec_timeline');
 
   const logoHdr = document.createElement('img');
-  logoHdr.setAttribute('id', 'logo_hdr');
+  logoHdr.setAttribute('id', 'logo_timeline');
   logoHdr.setAttribute('src', './components/images/solovino header.png');
 
   const logOutButton = document.createElement('p');
@@ -24,8 +23,8 @@ export const timeline = () => {
     logOut();
   });
 
-  const containerTwo = document.createElement('section');
-  containerTwo.setAttribute('id', 'container_two');
+  const timelineThirdCont = document.createElement('section');
+  timelineThirdCont.setAttribute('id', 'third_timeline');
 
   const form = document.createElement('form');
   form.id = 'form';
@@ -39,18 +38,19 @@ export const timeline = () => {
   sendButton.setAttribute('id', 'button_send');
   sendButton.textContent = 'Publicar';
   sendButton.addEventListener('click', (e) => {
-   
     const postPlace = document.getElementById('post_place').value;
     savePost(postPlace, new Date());
     e.preventDefault();
+    form.reset();
   });
 
   const posts = document.createElement('div');
   posts.append(ReadPost());
 
-  containerHdr.append(logoHdr, logOutButton);
+  timelineContainer.append(timelineSecCont, timelineThirdCont, posts);
+  timelineSecCont.append(logoHdr, logOutButton);
+  timelineThirdCont.appendChild(form);
   form.append(createPost, sendButton);
-  containerTwo.appendChild(form);
-  timelineContainer.append(containerHdr, containerTwo, posts);
+
   return timelineContainer;
 };

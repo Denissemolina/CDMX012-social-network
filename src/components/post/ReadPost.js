@@ -1,5 +1,5 @@
 import {
-  q, onSnapshot, orderPost, deletePosts, editPosts
+  q, onSnapshot, orderPost, deletePosts, editPosts,
 } from '../../lib/postFirebase.js';
 import { user } from '../../lib/firebase.js';
 import { timeline } from '../timeline.js'
@@ -7,7 +7,7 @@ import { timeline } from '../timeline.js'
 
 export const ReadPost = () => {
   const allPost = document.createElement('div');
-  onSnapshot(q, (querySnapshot) => {
+  onSnapshot(orderPost, (querySnapshot) => {
     while (allPost.firstChild) {
       allPost.removeChild(allPost.firstChild);
     }
@@ -16,11 +16,10 @@ export const ReadPost = () => {
       const divPosts = document.createElement('div');
       divPosts.setAttribute('id', 'post_div');
       divPosts.textContent = doc.data().post;
-      form.reset()
-     
-      const eje = document.getElementById('post_div');
-     // console.log(eje)
-      // divPosts.textContent = doc.data().user;
+
+      const eje = document.getElementById('post_place');
+// console.log(eje)
+    //  console.log(doc.data().user);
       // divPosts.textContent = doc.data().date;
 
       const reactionsPosts = document.createElement('section');
@@ -42,8 +41,8 @@ export const ReadPost = () => {
       editButt.addEventListener('click', async (e) => {
         const doc = await editPosts(e.target.dataset.id);
         const edit = doc.data();
-        console.log(eje['post_div'] = edit.post);
-        console.log(edit);
+      console.log( eje['post_place'] = edit.post);
+       // edit;
       });
 
       const deleteButt = document.createElement('img');

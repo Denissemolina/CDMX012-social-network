@@ -3,11 +3,11 @@ import { onNavigate } from '../main.js';
 import { createUser } from '../lib/firebase.js';
 
 export const register = () => {
-  const mainContainer = document.createElement('div');
-  mainContainer.setAttribute('id', 'main_container');
+  const registerContainer = document.createElement('div');
+  registerContainer.setAttribute('id', 'main_register');
 
-  const secContainer = document.createElement('div');
-  secContainer.setAttribute('id', 'sec_container');
+  const registerSecCont = document.createElement('div');
+  registerSecCont.setAttribute('id', 'sec_register');
 
   const tittleReg = document.createElement('h1');
   tittleReg.setAttribute('id', 'tittle_1');
@@ -36,17 +36,19 @@ export const register = () => {
     createUser(mailValue, passValue);
   });
 
-  const divReg2 = document.createElement('div');
-  divReg2.setAttribute('id', 'div_register2');
+  const registerThirdCont = document.createElement('div');
+  registerThirdCont.setAttribute('id', 'third_register');
 
-  const backToHome = document.createElement('button');
+  const backToHome = document.createElement('img');
+  backToHome.setAttribute('src', './components/images/casa-de-perro.png');
   backToHome.setAttribute('id', 'button_back');
   backToHome.textContent = 'Regresar al inicio';
   backToHome.addEventListener('click', () => {
     onNavigate('/');
   });
-  mainContainer.append(secContainer, divReg2)
-  secContainer.append(tittleReg, mailReg, passwordReg, conditions, buttonReg);
-  divReg2.appendChild(backToHome);
-  return mainContainer;
+
+  registerContainer.append(registerSecCont, registerThirdCont);
+  registerSecCont.append(tittleReg, mailReg, passwordReg, conditions, buttonReg);
+  registerThirdCont.appendChild(backToHome);
+  return registerContainer;
 };
