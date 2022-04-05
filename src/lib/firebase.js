@@ -29,22 +29,6 @@ export const createUser = (email, password) => {
     });
 };
 
-
-//Obtener el usuario que accedio
-export const user = auth.currentUser;
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const uid = user.uid; 
-    const displayName = user.displayName;
-    const email = user.email;
-    const photoURL = user.photoURL;
-    // console.log(user);
-    };
-});  
-
-
-//Perfil usuario
-
 // Iniciar sesion
 export const singIn = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
