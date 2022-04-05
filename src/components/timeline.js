@@ -1,8 +1,5 @@
-/* eslint-disable import/no-cycle */
 import { logOut } from '../lib/firebase.js';
 import { savePost } from '../lib/postFirebase.js';
-//import { dataCall } from '../';
-
 import { ReadPost } from './post/readPost.js';
 
 export const timeline = () => {

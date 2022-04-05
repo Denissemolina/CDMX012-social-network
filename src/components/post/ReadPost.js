@@ -1,5 +1,5 @@
 import {
-   onSnapshot, orderPost, deletePosts, editPosts,
+   onSnapshot, orderPost, deletePosts, editPosts, getPost
 } from '../../lib/postFirebase.js';
 import { user } from '../../main.js';
 import { timeline } from '../timeline.js'
@@ -27,8 +27,6 @@ export const ReadPost = () => {
       const textPost = document.createElement('p');
       textPost.textContent = doc.data().post;
 
-      const eje = document.getElementById('post_place');
-
       // OBTENIENDO FECHA EN TIEMPO REAL
       function getDate(date) {
         return new Date(
@@ -52,12 +50,11 @@ export const ReadPost = () => {
       editButt.setAttribute('class', 'btn_edit');
       editButt.setAttribute('data-id', doc.id);
       editButt.setAttribute('src', './components/images/edit_post.png');
-      editButt.addEventListener('click', (e) => {
-        console.log(e)
-      // const doc = await editPosts(e.target.dataset.id);
-     //   const edit = doc.data();
-    //   eje['post_place'] = edit.post;
-      // edit;
+      editButt.addEventListener('click', async (e) => {
+        const inputEdit = document.getElementById('post_place');
+        const doc = await editPosts(e.target.dataset.id);
+        const edit = doc.data();
+        inputEdit.value = edit.post;
       });
 
       const deleteButt = document.createElement('img');
