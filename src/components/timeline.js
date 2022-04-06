@@ -35,9 +35,9 @@ export const timeline = () => {
   sendButton.setAttribute('id', 'button_send');
   sendButton.textContent = 'Publicar';
   sendButton.addEventListener('click', (e) => {
+    e.preventDefault();
     const postPlace = document.getElementById('post_place').value;
     savePost(postPlace, new Date());
-    e.preventDefault();
     form.reset();
   });
 

@@ -21,6 +21,7 @@ export const home = () => {
   const passwordLogin = document.createElement('input');
   passwordLogin.placeholder = 'Contraseña';
   passwordLogin.setAttribute('id', 'pass_login');
+  passwordLogin.setAttribute('type', 'password');
   passwordLogin.setAttribute('class', 'input_login');
 
   const buttonLogin = document.createElement('button');
@@ -55,7 +56,7 @@ export const home = () => {
 
   // eslint-disable-next-line max-len
   homeContainer.append(homeSecCont, homeThirdCont);
-  homeSecCont.append(logoHome, mailLogin, passwordLogin, buttonLogin, createAccount);
-  homeThirdCont.append(buttonRegister, googleButt);
+  homeSecCont.append(logoHome, mailLogin, passwordLogin, buttonLogin, googleButt, createAccount);
+  homeThirdCont.append(buttonRegister);
   return homeContainer;
 };

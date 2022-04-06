@@ -39,7 +39,7 @@ onAuthStateChanged(auth, (user) => {
   } else {
     onNavigate('/');
   }
-  console.log(user);
+//  console.log(user);
 });
 
 // Obtener el usuario que accedio
@@ -49,7 +49,7 @@ if (user) {
   const displayName = user.displayName;
   const email = user.email;
   const photoURL = user.photoURL;
-  console.log(user);
+ // console.log(user);
 }
 
 // Perfil usuario

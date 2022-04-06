@@ -1,9 +1,7 @@
 import {
-  getFirestore, collection, query, addDoc, getDoc, setDoc, getDocs, onSnapshot, deleteDoc, doc, orderBy, updateDoc
+  getFirestore, collection, query, addDoc, getDoc, setDoc, getDocs, onSnapshot, deleteDoc, doc, orderBy, updateDoc,
 } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
-
 import { app } from './firebaseConfig.js';
-
 import { user } from '../main.js';
 
 export { onSnapshot } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
@@ -23,9 +21,14 @@ export const orderPost = query(data, orderBy('date', 'desc'));
 export const deletePosts = (id) => deleteDoc(doc(db, 'posts', id));
 
 // EDITAR POSTS
-export const editPosts = (id) => getDoc(doc(db, 'posts', id));
-
-export const updatePosts = (id, newFields) => updateDoc(doc(db, 'posts', id), newFields);
+export async function editPost(id, editInput, date) {
+  const postRef = doc(db, 'posts', id);
+  await updateDoc(postRef, {
+    post: editInput,
+    date: new Date(),
+  });
+}
+// export const updatePosts = (id, newFields) => updateDoc(doc(db, 'posts', id), newFields);
 
 // export const unsubscribe = onSnapshot(q, (snapshot) => {
 //   snapshot.docChanges().forEach((change) => {

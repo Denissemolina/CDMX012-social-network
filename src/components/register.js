@@ -21,6 +21,7 @@ export const register = () => {
   const passwordReg = document.createElement('input');
   passwordReg.placeholder = 'Contraseña';
   passwordReg.setAttribute('id', 'pass_register');
+  passwordReg.setAttribute('type', 'password');
   passwordReg.setAttribute('class', 'input_register');
 
   const conditions = document.createElement('p');
