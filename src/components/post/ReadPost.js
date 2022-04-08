@@ -1,7 +1,7 @@
 import {
   onSnapshot, orderPost, deletePosts, editPost, getPost,
 } from '../../lib/postFirebase.js';
-import { user } from '../../main.js';
+//import { user } from '../../main.js';
 import { timeline } from '../timeline.js';
 
 export const ReadPost = () => {
@@ -17,7 +17,7 @@ export const ReadPost = () => {
     function getDate(date) {
       return new Date(
         date.seconds * 1000 + date.nanoseconds / 1000000,
-      ).toDateString();
+      ).toDateString('es-MX');
     }
 
     querySnapshot.forEach((doc) => {
@@ -25,7 +25,7 @@ export const ReadPost = () => {
       divPosts.setAttribute('id', 'post_div');
 
       const userPost = document.createElement('h2');
-      //  userPost.textContent = doc.data().email;
+      userPost.textContent = doc.data().displayName;
 
       const datePost = document.createElement('h3');
       datePost.textContent = getDate(doc.data().date);
@@ -49,7 +49,8 @@ export const ReadPost = () => {
       editButt.setAttribute('data-id', doc.id);
       editButt.setAttribute('src', './components/images/edit_post.png');
       editButt.addEventListener('click', () => {
-
+        editContainer.classList.remove('newEditcontainer');
+        editContainer.classList.add('showEditContainer');
       });
 
       const sendButt = document.createElement('button');
@@ -66,10 +67,9 @@ export const ReadPost = () => {
       editContainer.classList.add('newEditcontainer');
       const editInput = document.createElement('input');
       editInput.id = 'input_value';
-      editInput.classList.add('postNewInput');
+      //editInput.classList.add('postNewInput');
       editContainer.append(editInput, sendButt);
 
-     
       const deleteButt = document.createElement('img');
       deleteButt.setAttribute('id', 'delete_post');
       deleteButt.setAttribute('class', 'btn_delete');

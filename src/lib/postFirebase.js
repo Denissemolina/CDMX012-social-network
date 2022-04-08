@@ -1,15 +1,28 @@
 import {
   getFirestore, collection, query, addDoc, getDoc, setDoc, getDocs, onSnapshot, deleteDoc, doc, orderBy, updateDoc,
 } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
+import {
+  getAuth,
+}
+  from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js';
 import { app } from './firebaseConfig.js';
-import { user } from '../main.js';
-
 export { onSnapshot } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
 
 const db = getFirestore();
+const auth = getAuth();
 
-// GUARDAR COLECCIONES EN FIRESTORE
-export const savePost = (post, date) => addDoc(collection(db, 'posts'), { post, date }); // Posts // timestap // array [] // uid
+// GUARDAR COLECCIONES EN FIRESTORE OBTENIENDO EL USUARIO
+export const savePost = (post, date) => {
+  const user = auth.currentUser;
+  if (user) {
+    const uid = user.uid;
+    const displayName = user.displayName;
+    const email = user.email;
+    const photoURL = user.photoURL;
+
+    return addDoc(collection(db, 'posts'), { post, date, displayName });
+  }
+}; // Posts // timestap // array [] // uid
 
 export const getPost = () => getDocs(collection(db, 'posts'));
 

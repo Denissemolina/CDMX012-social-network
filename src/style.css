@@ -225,4 +225,17 @@
         height: 1rem;
         background-color: #5a0b95;
     }
+    .newEditcontainer{
+        visibility: hidden;
+    }
+    .showEditContainer{
+        visibility: visible;
+      
+    }
+    #input_value{
+        background-color: rgba(255, 255, 255, .2);
+        opacity: 90%;
+        border: none;
+        border-bottom: 3px solid #00f7ff; 
+    }
 }

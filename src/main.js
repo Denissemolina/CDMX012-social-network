@@ -39,20 +39,9 @@ onAuthStateChanged(auth, (user) => {
   } else {
     onNavigate('/');
   }
-//  console.log(user);
+  console.log(user);
 });
 
-// Obtener el usuario que accedio
-export const user = auth.currentUser;
-if (user) {
-  const uid = user.uid;
-  const displayName = user.displayName;
-  const email = user.email;
-  const photoURL = user.photoURL;
- // console.log(user);
-}
-
-// Perfil usuario
 
 const component = routes[window.location.pathname];
 rootDiv.appendChild(component());

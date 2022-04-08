@@ -13,6 +13,14 @@ export const register = () => {
   tittleReg.setAttribute('id', 'tittle_1');
   tittleReg.textContent = 'Crear una cuenta';
 
+  const formReg = document.createElement('form');
+  formReg.id = 'form_register';
+
+  const userReg = document.createElement('input');
+  userReg.placeholder = 'Nombre del usuario';
+  userReg.setAttribute('id', 'user_register');
+  userReg.setAttribute('class', 'input_register');
+
   const mailReg = document.createElement('input');
   mailReg.placeholder = 'Correo Electrónico';
   mailReg.setAttribute('id', 'mail_register');
@@ -32,9 +40,10 @@ export const register = () => {
   buttonReg.setAttribute('class', 'button_register');
   buttonReg.textContent = 'Registate';
   buttonReg.addEventListener('click', () => {
+    const userValue = document.getElementById('user_register').value;
     const mailValue = document.getElementById('mail_register').value;
     const passValue = document.getElementById('pass_register').value;
-    createUser(mailValue, passValue);
+    createUser(mailValue, passValue, userValue);
   });
 
   const registerThirdCont = document.createElement('div');
@@ -49,7 +58,8 @@ export const register = () => {
   });
 
   registerContainer.append(registerSecCont, registerThirdCont);
-  registerSecCont.append(tittleReg, mailReg, passwordReg, conditions, buttonReg);
+  formReg.append(userReg, mailReg, passwordReg);
+  registerSecCont.append(tittleReg, formReg, conditions, buttonReg);
   registerThirdCont.appendChild(backToHome);
   return registerContainer;
 };
